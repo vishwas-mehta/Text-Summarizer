@@ -5,9 +5,16 @@ A Flask API for text summarization using Hugging Face transformers.
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from transformers import pipeline
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Initialize the summarization pipeline with a pretrained model
+# Using t5-small for faster inference (smaller model size)
+print("Loading summarization model... This may take a moment on first run.")
+summarizer = pipeline("summarization", model="t5-small")
+print("Model loaded successfully!")
 
 # Enable CORS for all routes (allows frontend to make requests)
 CORS(app, resources={
@@ -60,8 +67,19 @@ def summarize():
     
     text = data['text']
     
-    # TODO: Implement actual summarization with Hugging Face
-    summary = f"Summary placeholder for text of length {len(text)}"
+    # Generate summary using Hugging Face pipeline
+    # Adjust max_length and min_length based on input length
+    max_len = min(150, len(text.split()) // 2)
+    min_len = min(30, max_len // 2)
+    
+    result = summarizer(
+        text,
+        max_length=max_len,
+        min_length=min_len,
+        do_sample=False
+    )
+    
+    summary = result[0]['summary_text']
     
     return jsonify({
         'summary': summary,
