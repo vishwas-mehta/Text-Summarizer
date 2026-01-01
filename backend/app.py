@@ -3,7 +3,7 @@ Text Summarizer Backend
 A Flask API for text summarization using Hugging Face transformers.
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 # Initialize Flask app
@@ -35,6 +35,38 @@ def health_check():
     return jsonify({
         'status': 'healthy',
         'message': 'Text Summarizer API is running'
+    })
+
+
+@app.route('/api/summarize', methods=['POST'])
+def summarize():
+    """
+    Summarize the provided text.
+    
+    Request body:
+        - text (str): The text to summarize
+    
+    Returns:
+        - summary (str): The summarized text
+        - original_length (int): Character count of original text
+        - summary_length (int): Character count of summary
+    """
+    data = request.get_json()
+    
+    if not data or 'text' not in data:
+        return jsonify({
+            'error': 'Missing required field: text'
+        }), 400
+    
+    text = data['text']
+    
+    # TODO: Implement actual summarization with Hugging Face
+    summary = f"Summary placeholder for text of length {len(text)}"
+    
+    return jsonify({
+        'summary': summary,
+        'original_length': len(text),
+        'summary_length': len(summary)
     })
 
 
