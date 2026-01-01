@@ -1,0 +1,14 @@
+# Flask web framework
+flask==3.0.0
+
+# CORS support for frontend integration
+flask-cors==4.0.0
+
+# Hugging Face transformers for NLP models
+transformers==4.36.0
+
+# PyTorch for model inference
+torch==2.1.0
+
+# Werkzeug for request handling
+werkzeug==3.0.1
