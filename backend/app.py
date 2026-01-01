@@ -3,27 +3,37 @@ Text Summarizer Backend
 A Flask API for text summarization using Hugging Face transformers.
 """
 
+import logging
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from transformers import pipeline
+from config import Config
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
 
 # Initialize the summarization pipeline with a pretrained model
-# Using t5-small for faster inference (smaller model size)
-print("Loading summarization model... This may take a moment on first run.")
-summarizer = pipeline("summarization", model="t5-small")
-print("Model loaded successfully!")
+logger.info(f"Loading summarization model: {Config.MODEL_NAME}")
+logger.info("This may take a moment on first run...")
+summarizer = pipeline("summarization", model=Config.MODEL_NAME)
+logger.info("Model loaded successfully!")
 
 # Enable CORS for all routes (allows frontend to make requests)
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "http://localhost:5173"],
+        "origins": Config.ALLOWED_ORIGINS,
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }
 })
+logger.info(f"CORS enabled for origins: {Config.ALLOWED_ORIGINS}")
 
 
 @app.route('/')
@@ -82,16 +92,20 @@ def summarize():
             }), 400
         
         # Validate minimum text length for meaningful summarization
-        if len(text) < 50:
+        if len(text) < Config.MIN_TEXT_LENGTH:
+            logger.warning(f"Text too short: {len(text)} chars (min: {Config.MIN_TEXT_LENGTH})")
             return jsonify({
-                'error': 'Text too short. Minimum 50 characters required for summarization.'
+                'error': f'Text too short. Minimum {Config.MIN_TEXT_LENGTH} characters required for summarization.'
             }), 400
         
         # Validate maximum text length to prevent memory issues
-        if len(text) > 10000:
+        if len(text) > Config.MAX_TEXT_LENGTH:
+            logger.warning(f"Text too long: {len(text)} chars (max: {Config.MAX_TEXT_LENGTH})")
             return jsonify({
-                'error': 'Text too long. Maximum 10,000 characters allowed.'
+                'error': f'Text too long. Maximum {Config.MAX_TEXT_LENGTH:,} characters allowed.'
             }), 400
+        
+        logger.info(f"Processing text of {len(text)} characters")
         
         # Generate summary using Hugging Face pipeline
         # Adjust max_length and min_length based on input length
@@ -107,6 +121,8 @@ def summarize():
         
         summary = result[0]['summary_text']
         
+        logger.info(f"Summary generated: {len(summary)} chars from {len(text)} chars")
+        
         return jsonify({
             'summary': summary,
             'original_length': len(text),
@@ -114,10 +130,11 @@ def summarize():
         })
         
     except Exception as e:
+        logger.error(f"Summarization failed: {str(e)}")
         return jsonify({
             'error': f'Summarization failed: {str(e)}'
         }), 500
 
-
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    logger.info(f"Starting server on {Config.HOST}:{Config.PORT}")
+    app.run(debug=Config.DEBUG, host=Config.HOST, port=Config.PORT)
