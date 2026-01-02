@@ -1,20 +1,23 @@
 # AI Text Summarizer
 
-A full-stack web application that generates concise summaries from long text inputs using a pretrained NLP model. This project demonstrates the integration of modern NLP capabilities with a clean REST API.
+A full-stack web application that generates concise summaries from long text inputs using a pretrained NLP model. This project demonstrates the integration of modern NLP capabilities with a clean REST API and beautiful React frontend.
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)
+![React](https://img.shields.io/badge/React-18-61dafb.svg)
 ![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Transformers-orange.svg)
 
-## Features
+## ✨ Features
 
 - **AI-Powered Summarization**: Uses Hugging Face's T5 model for state-of-the-art text summarization
+- **Modern React UI**: Beautiful dark theme with glassmorphism effects and animations
 - **RESTful API**: Clean Flask-based API with proper error handling
+- **Real-time Stats**: Shows original length, summary length, and reduction percentage
+- **Copy to Clipboard**: One-click copy functionality for summaries
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Input Validation**: Comprehensive validation for text length and format
-- **CORS Support**: Ready for frontend integration
-- **Configurable**: Environment variable support for flexible deployment
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend
 - **Flask** - Python web framework
@@ -22,7 +25,13 @@ A full-stack web application that generates concise summaries from long text inp
 - **Hugging Face Transformers** - Pre-trained NLP models
 - **PyTorch** - Deep learning framework
 
-## Project Structure
+### Frontend
+- **React 18** - UI library
+- **Vite** - Build tool and dev server
+- **Axios** - HTTP client
+- **CSS3** - Custom styling with animations
+
+## 📁 Project Structure
 
 ```
 text-summarizer/
@@ -32,23 +41,31 @@ text-summarizer/
 │   ├── config.py           # Configuration settings
 │   └── requirements.txt    # Python dependencies
 │
-├── frontend/               # (Coming soon)
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx         # Main React component
+│   │   ├── api.js          # API service layer
+│   │   ├── index.css       # Global styles
+│   │   └── main.jsx        # React entry point
+│   ├── index.html          # HTML template
+│   ├── package.json        # Node dependencies
+│   └── vite.config.js      # Vite configuration
 │
 └── README.md
 ```
 
-## Installation
+## 🚀 Installation
 
 ### Prerequisites
 - Python 3.9 or higher
-- pip (Python package manager)
+- Node.js 18 or higher
+- npm or yarn
 
-### Setup
+### Backend Setup
 
-1. **Clone the repository**
+1. **Navigate to backend directory**
    ```bash
-   git clone https://github.com/vishwas-mehta/Text-Summarizer.git
-   cd Text-Summarizer
+   cd backend
    ```
 
 2. **Create a virtual environment**
@@ -59,7 +76,6 @@ text-summarizer/
 
 3. **Install dependencies**
    ```bash
-   cd backend
    pip install -r requirements.txt
    ```
 
@@ -67,24 +83,32 @@ text-summarizer/
    ```bash
    python app.py
    ```
-
    The API will be available at `http://localhost:5000`
 
-## API Documentation
+### Frontend Setup
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`
+
+## 📖 API Documentation
 
 ### Endpoints
 
 #### `GET /`
 Returns API information.
-
-**Response:**
-```json
-{
-  "name": "Text Summarizer API",
-  "version": "1.0.0",
-  "description": "AI-powered text summarization service"
-}
-```
 
 #### `GET /api/health`
 Health check endpoint.
@@ -116,41 +140,45 @@ Summarize the provided text.
 }
 ```
 
-**Error Responses:**
-- `400 Bad Request`: Missing or invalid text input
-- `500 Internal Server Error`: Summarization failed
-
 ### Example Usage
 
 ```bash
 curl -X POST http://localhost:5000/api/summarize \
   -H "Content-Type: application/json" \
-  -d '{"text": "Artificial intelligence has transformed the way we interact with technology. From virtual assistants to autonomous vehicles, AI is reshaping industries and creating new possibilities for innovation."}'
+  -d '{"text": "Artificial intelligence has transformed the way we interact with technology..."}'
 ```
 
-## Configuration
+## ⚙️ Configuration
 
-The following environment variables can be set to customize the application:
+Environment variables for the backend:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `MODEL_NAME` | `t5-small` | Hugging Face model to use |
 | `PORT` | `5000` | Server port |
-| `HOST` | `0.0.0.0` | Server host |
 | `MIN_TEXT_LENGTH` | `50` | Minimum input text length |
 | `MAX_TEXT_LENGTH` | `10000` | Maximum input text length |
 
-## Resume-Ready Description
+## 📝 Resume-Ready Description
 
 > **AI Text Summarizer | Flask, React, NLP**
 > 
 > Built a full-stack web application that generates concise summaries from long text inputs using a pretrained NLP model. Developed REST APIs in Flask for text processing and integrated them with a React frontend. Implemented CORS handling and efficient inference for real-time summarization.
 
-## License
+## 🖼️ Screenshots
+
+The application features:
+- Dark theme with gradient accents
+- Glassmorphism card effects
+- Smooth animations and transitions
+- Real-time character counting
+- Statistics showing text reduction
+
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Author
+## 👤 Author
 
 **Vishwas Mehta**
 - GitHub: [@vishwas-mehta](https://github.com/vishwas-mehta)
