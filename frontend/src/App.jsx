@@ -8,12 +8,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [stats, setStats] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const handleSummarize = async () => {
     // Reset states
     setError('');
     setSummary('');
     setStats(null);
+    setCopied(false);
 
     // Validate input
     if (!inputText.trim()) {
@@ -49,6 +51,17 @@ function App() {
     setSummary('');
     setError('');
     setStats(null);
+    setCopied(false);
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   return (
@@ -121,10 +134,15 @@ function App() {
           {/* Result Section */}
           {summary && (
             <div className="result-section">
-              <label className="section-label">
-                <span className="label-icon">✅</span>
-                Summary
-              </label>
+              <div className="result-header">
+                <label className="section-label">
+                  <span className="label-icon">✅</span>
+                  Summary
+                </label>
+                <button className="btn btn-copy" onClick={handleCopy}>
+                  {copied ? '✓ Copied!' : '📋 Copy'}
+                </button>
+              </div>
               <div className="result-box">
                 <p className="summary-text">{summary}</p>
               </div>
