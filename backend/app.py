@@ -55,6 +55,17 @@ def health_check():
     })
 
 
+@app.route('/api/version', methods=['GET'])
+def get_version():
+    """Get API version and model information."""
+    return jsonify({
+        'version': '1.0.0',
+        'model': Config.MODEL_NAME,
+        'min_text_length': Config.MIN_TEXT_LENGTH,
+        'max_text_length': Config.MAX_TEXT_LENGTH
+    })
+
+
 @app.route('/api/summarize', methods=['POST'])
 def summarize():
     """
