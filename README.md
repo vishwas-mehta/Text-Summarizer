@@ -13,9 +13,12 @@ A full-stack web application that generates concise summaries from long text inp
 - **Modern React UI**: Beautiful dark theme with glassmorphism effects and animations
 - **RESTful API**: Clean Flask-based API with proper error handling
 - **Real-time Stats**: Shows original length, summary length, and reduction percentage
+- **Word & Character Count**: Live word and character count as you type
+- **Keyboard Shortcuts**: Press Ctrl+Enter (or Cmd+Enter on Mac) to summarize quickly
 - **Copy to Clipboard**: One-click copy functionality for summaries
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Input Validation**: Comprehensive validation for text length and format
+- **API Version Endpoint**: Get model and configuration info via `/api/version`
 
 ## 🛠️ Tech Stack
 
