@@ -93,7 +93,7 @@ function App() {
               disabled={isLoading}
             />
             <div className="input-footer">
-              <span className="char-count">{inputText.length} characters</span>
+              <span className="char-count">{inputText.length} characters | {inputText.trim() ? inputText.trim().split(/\s+/).length : 0} words</span>
               <div className="button-group">
                 <button
                   className="btn btn-secondary"
