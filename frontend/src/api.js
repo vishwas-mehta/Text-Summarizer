@@ -36,4 +36,13 @@ export const summarizeText = async (text) => {
   return response.data;
 };
 
+/**
+ * Get API version and model information
+ * @returns {Promise<Object>} Version and config info
+ */
+export const getVersion = async () => {
+  const response = await api.get('/api/version');
+  return response.data;
+};
+
 export default api;
