@@ -14,7 +14,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 60000, // 60 seconds timeout for summarization
+  timeout: 90000, // 90 seconds timeout for longer summarization tasks
 });
 
 /**
