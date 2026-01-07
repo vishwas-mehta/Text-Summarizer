@@ -23,8 +23,8 @@ function App() {
       return;
     }
 
-    if (inputText.length < 50) {
-      setError('Text is too short. Please enter at least 50 characters.');
+    if (inputText.length < 30) {
+      setError('Text is too short. Please enter at least 30 characters.');
       return;
     }
 
