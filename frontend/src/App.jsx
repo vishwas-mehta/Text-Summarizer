@@ -87,7 +87,7 @@ function App() {
             <textarea
               id="input-text"
               className="text-input"
-              placeholder="Paste your article, essay, or any long text here... (minimum 50 characters) • Press Ctrl+Enter to summarize"
+              placeholder="Paste your article, essay, or any long text here... (minimum 30 characters) • Press Ctrl+Enter to summarize"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={(e) => {
