@@ -12,3 +12,6 @@ torch==2.1.0
 
 # Werkzeug for request handling
 werkzeug==3.0.1
+
+# Python dotenv for environment variable management
+python-dotenv==1.0.0
