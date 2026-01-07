@@ -173,7 +173,7 @@ function App() {
 
         {/* Footer */}
         <footer className="footer">
-          <p>Powered by Hugging Face Transformers • Built with React & Flask</p>
+          <p>© 2026 AI Text Summarizer • Powered by Hugging Face Transformers • Built with React & Flask</p>
         </footer>
       </div>
     </div>
