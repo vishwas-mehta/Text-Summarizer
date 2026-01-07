@@ -1,1 +1,11 @@
-/* App-specific styles - minimal since most styling is in index.css */
+/**
+ * App.css - Application-specific styles
+ * 
+ * This file contains component-specific styles for the Text Summarizer app.
+ * Most styling is handled in index.css for global consistency.
+ * 
+ * @author Vishwas Mehta
+ * @updated 2026
+ */
+
+/* Component-specific overrides can be added below */
