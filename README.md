@@ -177,10 +177,6 @@ The application features:
 - Real-time character counting
 - Statistics showing text reduction
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## 👤 Author
 
 **Vishwas Mehta**
